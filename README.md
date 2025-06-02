@@ -1,56 +1,58 @@
-# Wykrywanie defektów na płytkach PCB
+# PCB Defect Detection
 
-![Obraz referencyjny](./template_rgb.JPG)
-![Obraz testowy](./test_rgb.jpg)
-![Obraz po odjęciu](./subtracted_image.png)
-![Wynik końcowy z zaznaczonymi defektami](./final_result.png)
+![Reference Image](./template_rgb.JPG)  
+![Test Image](./test_rgb.jpg)  
+![Subtracted Image](./subtracted_image.png)  
+![Final Result with Detected Defects](./final_result.png)
 
-> Zaimplementowanie klasycznej metody detekcji defektów na płytkach PCB (ang. *Printed Circuit Board*) na podstawie artykułu:
+### Output: "Detected: 3 defects"
+
+> Implementation of a classical image processing method for defect detection on PCB (*Printed Circuit Board*) based on the article:
 
 > P. Kumar, M. Panchal, R. Sahu,  
 > *Comparative Study of Image Processing and Transfer Learning Techniques for an Automated PCB Fault Detection System*,  
 > IJRASET, Volume 9 Issue VI, June 2021.
 
-## Opis działania
+## How It Works
 
-Algorytm porównuje dwa obrazy: referencyjny (bez defektów) i testowy (potencjalnie uszkodzony), aby wykryć różnice wskazujące na defekty.
+The algorithm compares two images: a **reference image** (defect-free) and a **test image** (potentially faulty), in order to identify visual differences that indicate defects.
 
-### Etapy przetwarzania:
+### Processing Steps:
 
-1. **Wczytanie i skalowanie obrazów** – konwersja do skali szarości, zmniejszenie do rozmiaru GUI.
-2. **Rozmycie Gaussowskie** – redukcja szumów i wygładzenie obrazu.
-3. **Progowanie adaptacyjne** – binarizacja odporna na nierównomierne oświetlenie.
-4. **Odejmowanie obrazów** – wykrycie różnic między obrazem testowym i referencyjnym.
-5. **Filtracja medianowa** – usunięcie pojedynczych szumów po odejmowaniu.
-6. **Segmentacja i zliczanie defektów** – wykrycie konturów i odfiltrowanie obiektów poza zakresem rozmiaru.
+1. **Image loading and resizing** – convert to grayscale and scale down to match the GUI display size.
+2. **Gaussian blur** – smooth the image and reduce noise.
+3. **Adaptive thresholding** – binarize the image, robust against uneven lighting.
+4. **Image subtraction** – detect differences between the reference and test images.
+5. **Median filtering** – remove noise after subtraction.
+6. **Segmentation and defect counting** – find contours and filter objects by area.
 
-## Wyniki
+## Results
 
-W testach algorytm skutecznie wykrywał typowe błędy jak:
-- brak otworów,
-- nadmiar ścieżek,
-- zwarcia,
-- nieciągłości przewodników.
+In tests, the algorithm successfully detected typical PCB issues such as:
+- missing holes,
+- excess tracks,
+- short circuits,
+- broken connections.
 
-Wyniki były wizualizowane i liczbowe, a GUI prezentowało poszczególne kroki analizy obrazu.
+Results were presented both visually and numerically. A simple GUI displayed each processing step.
 
-## Wymagania
+## Requirements
 
 - Python 3.x  
 - OpenCV (`cv2`)  
-- Tkinter (dla GUI)
+- Tkinter (for GUI)
 
-## Pliki
+## Files
 
-- `main.py` – główny plik źródłowy  
-- `template_rgb.JPG` – obraz referencyjny  
-- `test_rgb.jpg` – obraz testowy  
-- `subtracted_image.png`, `final_result.png` – przykładowe wyniki
+- `main.py` – main source file  
+- `template_rgb.JPG` – reference image  
+- `test_rgb.jpg` – test image  
+- `subtracted_image.png`, `final_result.png` – example outputs
 
-## Wnioski
+## Conclusion
 
-Klasyczne przetwarzanie obrazu, choć proste, może być skuteczne w detekcji defektów PCB bez konieczności używania modeli AI. Metoda dobrze sprawdza się przy dobrej jakości wejściowych obrazów i w warunkach kontrolowanych.
+Although basic, classical image processing techniques can be effective for PCB defect detection without the need for AI models. This method works well with high-quality input images and in controlled environments.
 
-## Licencja
+## License
 
-Projekt edukacyjny – brak licencji produkcyjnej.
+Educational project – not intended for production use.
